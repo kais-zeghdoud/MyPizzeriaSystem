@@ -14,8 +14,8 @@ namespace Menu{
     public class Commande{
         private readonly uint numero;
         private DateTime heureDate;
-        private uint commisID;
-        private uint clientID;
+        private Commis commis;
+        private Client client;
         private uint nbItems;
         private List<Pizza> pizzas;
         private List<boissons> produitsAnnexes;
@@ -24,11 +24,11 @@ namespace Menu{
         private paiement etatPaiement;
 
 
-        public Commande(uint commisID, uint clientID, List<Pizza> pizzas, List<boissons> produitsAnnexes){
-            numero = (uint)PizzeriaController.getInstance().getCommandes().Count + 1;           
+        public Commande(Commis commis, Client client, List<Pizza> pizzas, List<boissons> produitsAnnexes){
+            numero = (uint)PizzeriaController.getInstance().getCommandes().Count + 1;       
             heureDate = DateTime.Now;
-            this.commisID = commisID;
-            this.clientID = clientID;
+            this.commis = commis;
+            this.client = client;
             this.pizzas = pizzas;
             this.produitsAnnexes = produitsAnnexes;
             this.nbItems = (uint)(pizzas.Count + produitsAnnexes.Count);
@@ -42,9 +42,9 @@ namespace Menu{
             totalPrice += (double)(produitsAnnexes.Count * 1.5);
         }
 
-        public uint getCommisID(){return commisID;}
+        public Commis getCommis(){return commis;}
         
-        public uint getClientID(){return clientID;}
+        public Client getClient(){return client;}
 
         public double getTotalPrice(){return totalPrice;}
 

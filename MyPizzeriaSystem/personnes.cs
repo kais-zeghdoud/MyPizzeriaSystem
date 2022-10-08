@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using Interactions;
 using Menu;
+using Process;
 
 namespace Personnes{
 
     public abstract class Personne{
         private string nom;
         private string prenom;
-        List<Message>? messages; // '?' represents that this list of messages can be empty (null)
+        private List<Message> messages = new List<Message>();
 
         public Personne(string nom, string prenom){
             this.nom = nom;
@@ -69,14 +70,14 @@ namespace Personnes{
             Console.Write("Entrez le nom du client : ");
             string nom = Console.ReadLine()!;
 
-            Console.Write("Entrez le nom du client : ");
-            string? prenom = Console.ReadLine()!;
+            Console.Write("Entrez le prénom du client : ");
+            string prenom = Console.ReadLine()!;
 
-            Console.Write("Entrez le nom du client : ");
-            string? adresse = Console.ReadLine()!;
+            Console.Write("Entrez l'adresse de {0} {1} : ", prenom, nom);
+            string adresse = Console.ReadLine()!;
 
-            Console.Write("Entrez le nom du client : ");
-            string? telephone = Console.ReadLine()!;
+            Console.Write("Entrez le numéro de téléphone de {0} {1} : ", prenom, nom);
+            string telephone = Console.ReadLine()!;
 
             PizzeriaController.getInstance().getClients().Add(new Client(nom, prenom, adresse, telephone));
         }
@@ -88,23 +89,19 @@ namespace Personnes{
         }
 
         public void addOrder(Client client){
-            uint n_pizza, n_boissons;
-            List<Pizza> pizzas;
-            List<boissons> produitsAnnexes;
+            List<Pizza> pizzas = new List<Pizza>();
+            List<boissons> produitsAnnexes = new List<boissons>();
+            int n_pizza = Fonctions.askNumber("pizza");
+            int n_boissons = Fonctions.askNumber("pizza");
 
-            for (int i = 0; i < n_pizza; i++)
-            {
-                Console.WriteLine("Enter pizza {0} : ", i+1);
-                pizzas.Add(new Pizza(Console.ReadLine()));
+            for (int i = 0; i < n_pizza; i++){
+                pizzas.Add(Fonctions.askPizza());
             }
-            for (int i = 0; i < n_boissons; i++)
-            {
-                Console.WriteLine("Enter drink {0}", i+1);
-                int j = Console.ReadLine();
-                produitsAnnexes.Add(new boissons{j});
+            for (int i = 0; i < n_boissons; i++){
+                produitsAnnexes.Add(Fonctions.askDrink());
             }
-
-            PizzeriaController.getInstance().getCommandes().Add(new Commande(getCommisID(), client.getClientID(), pizzas, produitsAnnexes));
+            
+            PizzeriaController.getInstance().getCommandes().Add(new Commande(this, client, pizzas, produitsAnnexes));
         }
 
         public void closeOrder(Commande commande){
@@ -129,7 +126,7 @@ namespace Personnes{
         public uint getNbLivraisons(){return nbLivraisons;}
 
         public void remiseCommande(Commande commande){
-            commande.getClientID().paieCommande(commande);
+            commande.getClient().paieCommande(commande);
             commande.setEtatPaiement(paiement.encaissé);
             nbLivraisons ++;
         }

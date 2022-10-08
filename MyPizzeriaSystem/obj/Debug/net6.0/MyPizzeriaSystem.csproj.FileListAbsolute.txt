@@ -3,3 +3,13 @@ C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\
 C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\obj\Debug\net6.0\MyPizzeriaSystem.AssemblyInfoInputs.cache
 C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\obj\Debug\net6.0\MyPizzeriaSystem.AssemblyInfo.cs
 C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\obj\Debug\net6.0\MyPizzeriaSystem.csproj.CoreCompileInputs.cache
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\bin\Debug\net6.0\MyPizzeriaSystem.exe
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\bin\Debug\net6.0\MyPizzeriaSystem.deps.json
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\bin\Debug\net6.0\MyPizzeriaSystem.runtimeconfig.json
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\bin\Debug\net6.0\MyPizzeriaSystem.dll
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\bin\Debug\net6.0\MyPizzeriaSystem.pdb
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\obj\Debug\net6.0\MyPizzeriaSystem.dll
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\obj\Debug\net6.0\refint\MyPizzeriaSystem.dll
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\obj\Debug\net6.0\MyPizzeriaSystem.pdb
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\obj\Debug\net6.0\MyPizzeriaSystem.genruntimeconfig.cache
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\obj\Debug\net6.0\ref\MyPizzeriaSystem.dll

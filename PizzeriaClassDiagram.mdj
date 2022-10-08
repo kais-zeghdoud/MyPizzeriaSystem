@@ -5318,7 +5318,7 @@
 											"top": 62,
 											"width": 162.22705078125,
 											"height": 13,
-											"text": "+nom: String",
+											"text": "-nom: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5335,7 +5335,7 @@
 											"top": 77,
 											"width": 162.22705078125,
 											"height": 13,
-											"text": "+prenom: String",
+											"text": "-prenom: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5352,7 +5352,7 @@
 											"top": 92,
 											"width": 162.22705078125,
 											"height": 13,
-											"text": "+messages: List<Message>",
+											"text": "-messages: List<Message>",
 											"horizontalAlignment": 0
 										}
 									],
@@ -8888,6 +8888,7 @@
 								"$ref": "AAAAAAGDf3CxEcmEO9E="
 							},
 							"name": "nom",
+							"visibility": "private",
 							"type": "String"
 						},
 						{
@@ -8897,6 +8898,7 @@
 								"$ref": "AAAAAAGDf3CxEcmEO9E="
 							},
 							"name": "prenom",
+							"visibility": "private",
 							"type": "String"
 						},
 						{
@@ -8906,6 +8908,7 @@
 								"$ref": "AAAAAAGDf3CxEcmEO9E="
 							},
 							"name": "messages",
+							"visibility": "private",
 							"type": "List<Message>"
 						}
 					],
