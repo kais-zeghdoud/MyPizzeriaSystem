@@ -60,7 +60,7 @@ namespace Menu{
         private format taille;
         private double prix;
 
-        private static Dictionary<string, double> pizzaPrices = new Dictionary<string, double>(){
+        public static Dictionary<string, double> pizzaPrices = new Dictionary<string, double>(){
             {"Marguerita", 6.50},
             {"Végétarienne", 7.90},
             {"Reine", 8.50},

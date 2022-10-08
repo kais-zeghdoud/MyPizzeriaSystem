@@ -66,8 +66,18 @@ namespace Personnes{
         public uint getNbCommandes(){return nbCommandes;}
 
         public void addCustomer(){
-            string nom, prenom, adresse;
-            string telephone;
+            Console.Write("Entrez le nom du client : ");
+            string nom = Console.ReadLine()!;
+
+            Console.Write("Entrez le nom du client : ");
+            string? prenom = Console.ReadLine()!;
+
+            Console.Write("Entrez le nom du client : ");
+            string? adresse = Console.ReadLine()!;
+
+            Console.Write("Entrez le nom du client : ");
+            string? telephone = Console.ReadLine()!;
+
             PizzeriaController.getInstance().getClients().Add(new Client(nom, prenom, adresse, telephone));
         }
 

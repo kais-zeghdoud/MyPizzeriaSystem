@@ -21,9 +21,9 @@ namespace Interactions{
     }
 
     public sealed class PizzeriaController{
-        private static PizzeriaController? instance;
-        private static List<Client>? clients;
-        private static List<Commande>? commandes;
+        private static PizzeriaController instance;
+        private static List<Client> clients;
+        private static List<Commande> commandes;
 
         private PizzeriaController(){} // declare les listes de clients - commandes - 
 
@@ -33,9 +33,9 @@ namespace Interactions{
             return instance;
         }
 
-        public List<Client>? getClients(){return clients;}
+        public List<Client> getClients(){return clients;}
 
-        public List<Commande>? getCommandes(){return commandes;}
+        public List<Commande> getCommandes(){return commandes;}
 
 
     }

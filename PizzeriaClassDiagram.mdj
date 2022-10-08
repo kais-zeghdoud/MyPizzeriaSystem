@@ -2166,7 +2166,7 @@
 											"width": 232.3115234375,
 											"height": 13,
 											"underline": true,
-											"text": "-pizzaPrices: Dictionary<string, double>",
+											"text": "+pizzaPrices: Dictionary<string, double>",
 											"horizontalAlignment": 0
 										}
 									],
@@ -8539,7 +8539,6 @@
 								"$ref": "AAAAAAGDey8DxqDTkbE="
 							},
 							"name": "pizzaPrices",
-							"visibility": "private",
 							"isStatic": true,
 							"type": "Dictionary<string, double>"
 						}
