@@ -1,0 +1,97 @@
+<Window	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		Width = "600"
+		Height = "400"
+		Title = "MyPizzeriaSystem">
+	
+<Grid>
+  <Label x:Name="Commis"
+          Content="Commis"
+          Margin="10,10,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top" />
+  <Button x:Name="CommisButton"
+          Content="Go to Commis Section"
+          Width="200"
+          Height="20"
+          Margin="10,40,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Grid.Column="0"
+          Grid.Row="0" />
+  
+  <Label x:Name="Livreur"
+     	  Content="Livreur"
+          Margin="10,200,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top" />
+  <Button x:Name="LivreurButton"
+          Content="Go to Livreur Section"
+          Width="200"
+          Height="20"
+          Margin="10,230,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Grid.Column="1"
+          Grid.Row="1" />
+  
+  <Label x:Name="PizzeiaController"
+          Content="PizzeriaController"
+          Margin="350,10,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top" />
+  <Button x:Name="PizzeriaControllerButton"
+          Content="Go to PizzeriaController section"
+          Width="200"
+          Height="20"
+          Margin="350,40,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Grid.Column="1"
+          Grid.Row="1" />
+  
+  
+   <Label x:Name="Modules"
+          Content="Modules"
+          Margin="350,200,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top" />
+  <Button x:Name="ModCEButton"
+          Content="Module clients - effectif"
+          Width="200"
+          Height="20"
+          Margin="350,230,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Grid.Column="1"
+          Grid.Row="1" />
+    <Button x:Name="ModCmdButton"
+          Content="Module commandes"
+          Width="200"
+          Height="20"
+          Margin="350,260,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Grid.Column="1"
+          Grid.Row="1" />
+	  <Button x:Name="ModStatButton"
+          Content="Module statistiques"
+          Width="200"
+          Height="20"
+          Margin="350,290,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Grid.Column="1"
+          Grid.Row="1" />
+	    <Button x:Name="ModComButton"
+          Content="Module communication"
+          Width="200"
+          Height="20"
+          Margin="350,320,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Grid.Column="1"
+          Grid.Row="1" />
+</Grid>
+
+</Window>
