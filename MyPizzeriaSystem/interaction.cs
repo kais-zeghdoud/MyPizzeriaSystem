@@ -24,6 +24,7 @@ namespace Interactions{
         private static PizzeriaController instance;
         private static List<Client> clients = new List<Client>();
         private static List<Commande> commandes = new List<Commande>();
+        private static List<Employe> employes = new List<Employe>();
 
         private PizzeriaController(){} // declare les listes de clients - commandes - 
 
@@ -36,6 +37,8 @@ namespace Interactions{
         public List<Client> getClients(){return clients;}
 
         public List<Commande> getCommandes(){return commandes;}
+
+        public List<Employe> getEmployes(){return employes;}
 
 
     }

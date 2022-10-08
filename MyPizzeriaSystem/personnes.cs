@@ -17,52 +17,23 @@ namespace Personnes{
         }
     }
 
-    public class Client : Personne{
-        private readonly uint customerID;
-        private string adresse;
-        private string telephone;
-        private DateTime firstOrder;
-        private uint nbCommandes = 0;
-        private double montantAchats = 0;
 
-        public Client(string nom, string prenom, string adresse, string telephone) : base(nom, prenom)
+    public abstract class Employe : Personne{
+        private readonly uint employeID;
+
+        public Employe(string nom, string prenom) : base(nom, prenom)
         {
-            this.customerID = (uint)PizzeriaController.getInstance().getClients().Count + 1;
-            this.adresse = adresse;
-            this.telephone = telephone;
-            this.firstOrder = DateTime.Now;
+            employeID = (uint)PizzeriaController.getInstance().getEmployes().Count + 1;
         }
 
-        public uint getClientID(){return customerID;}
-
-
-        public void paieCommande(Commande commande){
-            nbCommandes++;
-            montantAchats += commande.getTotalPrice();
-        }
-
-        public void increaseNbCommandes(){
-            nbCommandes ++;
-        }
-
-        public void increaseMontantAchats(double totalPrice){
-            montantAchats += totalPrice;
-        }
-
+        public uint getEmployeID(){return employeID;}
     }
 
 
-    public class Commis : Personne{
-        private readonly uint employeID;
+    public class Commis : Employe{
         private uint nbCommandes = 0;
 
-        public Commis(string nom, string prenom) : base(nom, prenom)
-        {
-            // appeler PizzeriaController pour avoir le nombre d'employés et attribuer une valeur à employeID
-
-        }
-
-        public uint getCommisID(){return employeID;}
+        public Commis(string nom, string prenom) : base(nom, prenom){}
 
         public uint getNbCommandes(){return nbCommandes;}
 
@@ -111,17 +82,11 @@ namespace Personnes{
     }
 
 
-    public class Livreur : Personne{
-        private readonly uint employeID;
+    public class Livreur : Employe{
+        
         private uint nbLivraisons = 0;
 
-        public Livreur(string nom, string prenom) : base(nom, prenom)
-        {
-            // appeler PizzeriaController pour avoir le nombre d'employés et attribuer une valeur à employeID
-        }
-
-
-        public uint getLivreurID(){return employeID;}
+        public Livreur(string nom, string prenom) : base(nom, prenom){}
 
         public uint getNbLivraisons(){return nbLivraisons;}
 
@@ -135,4 +100,41 @@ namespace Personnes{
             commande.setEtatPaiement(paiement.perte);
         }
     }
+
+
+    public class Client : Personne{
+        private readonly uint customerID;
+        private string adresse;
+        private string telephone;
+        private DateTime firstOrder;
+        private uint nbCommandes = 0;
+        private double montantAchats = 0;
+
+        public Client(string nom, string prenom, string adresse, string telephone) : base(nom, prenom)
+        {
+            this.customerID = (uint)PizzeriaController.getInstance().getClients().Count + 1;
+            this.adresse = adresse;
+            this.telephone = telephone;
+            this.firstOrder = DateTime.Now;
+        }
+
+        public uint getClientID(){return customerID;}
+
+
+        public void paieCommande(Commande commande){
+            nbCommandes++;
+            montantAchats += commande.getTotalPrice();
+        }
+
+        public void increaseNbCommandes(){
+            nbCommandes ++;
+        }
+
+        public void increaseMontantAchats(double totalPrice){
+            montantAchats += totalPrice;
+        }
+
+    }
+
+
 }
