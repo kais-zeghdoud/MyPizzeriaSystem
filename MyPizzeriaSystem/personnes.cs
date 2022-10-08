@@ -15,6 +15,14 @@ namespace Personnes{
             this.nom = nom;
             this.prenom = prenom;
         }
+
+        public string getFullName(){return nom + ' ' +prenom;}
+
+        public List<Message> getMessages(){return messages;}
+
+        public void sendMessage(string text, Personne receiver){
+            receiver.getMessages().Add(new Message(text, this, receiver));
+        }
     }
 
 
@@ -119,7 +127,9 @@ namespace Personnes{
         }
 
         public uint getClientID(){return customerID;}
-
+        public string getAdresse(){return adresse;}
+        public string getTelephone(){return telephone;}
+        public DateTime getFirstOrder(){return firstOrder;}
 
         public void paieCommande(Commande commande){
             nbCommandes++;

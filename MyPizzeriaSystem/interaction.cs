@@ -18,6 +18,10 @@ namespace Interactions{
             heureDate = DateTime.Now;
         }
 
+        public string toString(){
+            return "Sender : " + sender.getFullName() + "\nDestinataire : " + receiver.getFullName() + 
+            "\nDate et heure : " + heureDate.ToString() + "\nMessage : " + text;
+        }
     }
 
     public sealed class PizzeriaController{
@@ -40,6 +44,9 @@ namespace Interactions{
 
         public List<Employe> getEmployes(){return employes;}
 
+        public void addCommis(string nom, string prenom){employes.Add(new Commis(nom, prenom));}
+        
+        public void addLivreur(string nom, string prenom){employes.Add(new Livreur(nom, prenom));}
 
     }
 }
