@@ -26,11 +26,18 @@ namespace Interactions{
 
     public sealed class PizzeriaController{
         private static PizzeriaController instance;
-        private static List<Client> clients = new List<Client>();
-        private static List<Commande> commandes = new List<Commande>();
-        private static List<Employe> employes = new List<Employe>();
+        private static List<Client> clients;
+        private static List<Commande> commandes;
+        private static List<Commis> commis;
+        private static List<Livreur> livreurs;
 
-        private PizzeriaController(){} // declare les listes de clients - commandes - 
+        private PizzeriaController()
+        {
+            clients = new List<Client>();
+            commandes = new List<Commande>();
+            commis = new List<Commis>();
+            livreurs = new List<Livreur>();
+        }
 
         public static PizzeriaController getInstance(){
             if(instance == null)
@@ -42,11 +49,13 @@ namespace Interactions{
 
         public List<Commande> getCommandes(){return commandes;}
 
-        public List<Employe> getEmployes(){return employes;}
+        public List<Commis> getCommis(){return commis;}
 
-        public void addCommis(string nom, string prenom){employes.Add(new Commis(nom, prenom));}
+        public List<Livreur> getLivreurs(){return livreurs;}
+
+        public void addCommis(string nom, string prenom){commis.Add(new Commis(nom, prenom));}
         
-        public void addLivreur(string nom, string prenom){employes.Add(new Livreur(nom, prenom));}
+        public void addLivreur(string nom, string prenom){livreurs.Add(new Livreur(nom, prenom));}
 
     }
 }

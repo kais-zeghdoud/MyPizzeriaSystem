@@ -31,7 +31,9 @@ namespace Personnes{
 
         public Employe(string nom, string prenom) : base(nom, prenom)
         {
-            employeID = (uint)PizzeriaController.getInstance().getEmployes().Count + 1;
+            uint nbCommis = (uint) PizzeriaController.getInstance().getCommis().Count;
+            uint nbLivreurs = (uint) PizzeriaController.getInstance().getLivreurs().Count;
+            employeID = nbCommis + nbLivreurs + 1;
         }
 
         public uint getEmployeID(){return employeID;}
@@ -47,16 +49,15 @@ namespace Personnes{
 
         public void addCustomer(){
             Console.Write("Entrez le nom du client : ");
-            string nom = Console.ReadLine()!;
+            string nom = Console.ReadLine();
 
             Console.Write("Entrez le prénom du client : ");
-            string prenom = Console.ReadLine()!;
+            string prenom = Console.ReadLine();
 
-            Console.Write("Entrez l'adresse de {0} {1} : ", prenom, nom);
-            string adresse = Console.ReadLine()!;
+            Adresse adresse = Fonctions.askAdresse();
 
             Console.Write("Entrez le numéro de téléphone de {0} {1} : ", prenom, nom);
-            string telephone = Console.ReadLine()!;
+            string telephone = Console.ReadLine();
 
             PizzeriaController.getInstance().getClients().Add(new Client(nom, prenom, adresse, telephone));
         }
@@ -71,7 +72,7 @@ namespace Personnes{
             List<Pizza> pizzas = new List<Pizza>();
             List<boissons> produitsAnnexes = new List<boissons>();
             int n_pizza = Fonctions.askNumber("pizza");
-            int n_boissons = Fonctions.askNumber("pizza");
+            int n_boissons = Fonctions.askNumber("boissons");
 
             for (int i = 0; i < n_pizza; i++){
                 pizzas.Add(Fonctions.askPizza());
@@ -79,7 +80,8 @@ namespace Personnes{
             for (int i = 0; i < n_boissons; i++){
                 produitsAnnexes.Add(Fonctions.askDrink());
             }
-            
+
+            client.setFirstOrder();
             PizzeriaController.getInstance().getCommandes().Add(new Commande(this, client, pizzas, produitsAnnexes));
         }
 
@@ -112,24 +114,25 @@ namespace Personnes{
 
     public class Client : Personne{
         private readonly uint customerID;
-        private string adresse;
+        private Adresse adresse;
         private string telephone;
         private DateTime firstOrder;
         private uint nbCommandes = 0;
         private double montantAchats = 0;
 
-        public Client(string nom, string prenom, string adresse, string telephone) : base(nom, prenom)
+        public Client(string nom, string prenom, Adresse adresse, string telephone) 
+        : base(nom, prenom)
         {
             this.customerID = (uint)PizzeriaController.getInstance().getClients().Count + 1;
             this.adresse = adresse;
             this.telephone = telephone;
-            this.firstOrder = DateTime.Now;
         }
 
         public uint getClientID(){return customerID;}
-        public string getAdresse(){return adresse;}
+        public Adresse getAdresse(){return adresse;}
         public string getTelephone(){return telephone;}
         public DateTime getFirstOrder(){return firstOrder;}
+        public void setFirstOrder(){firstOrder = DateTime.Now;}
 
         public void paieCommande(Commande commande){
             nbCommandes++;
@@ -146,5 +149,23 @@ namespace Personnes{
 
     }
 
+
+    public class Adresse{
+        private uint numRue;
+        private string nomRue;
+        private uint codePostal;
+        private string ville;
+
+        public Adresse(uint numRue, string nomRue, uint codePostal, string ville){
+            this.numRue = numRue;
+            this.nomRue = nomRue;
+            this.codePostal = codePostal;
+            this.ville = ville;
+        }
+
+        public string toString(){
+            return numRue + " " + nomRue + " " + codePostal + " " + ville;
+        }
+    }
 
 }

@@ -1,5 +1,6 @@
 using System;
 using Menu;
+using Personnes;
 
 namespace Process
 {
@@ -58,6 +59,21 @@ namespace Process
         }
 
 
+        public static Adresse askAdresse(){
+            Console.Write("Entrez le numéro de rue : ");
+            uint numRue = Convert.ToUInt16(Console.ReadLine());
+
+            Console.Write("Entrez le nom de la rue : ");
+            string nomRue = Console.ReadLine();
+
+            Console.Write("Entrez le code postal : ");
+            uint codePostal = Convert.ToUInt32(Console.ReadLine());
+
+            Console.Write("Entrez la ville : ");
+            string ville = Console.ReadLine();
+
+            return new Adresse(numRue, nomRue, codePostal, ville);
+        }
 
 
     }
