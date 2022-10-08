@@ -5,24 +5,28 @@ using Menu;
 
 namespace Personnes{
 
-    abstract class Personne{
+    public abstract class Personne{
         private string nom;
         private string prenom;
-        List<Message> messages;
-    }
+        List<Message>? messages; // '?' represents that this list of messages can be empty (null)
 
-    class Client : Personne{
-        private readonly uint customerID;
-        private string adresse;
-        private string[10] telephone;
-        private DateTime firstOrder;
-        private uint nbCommandes = 0;
-        private decimal montantAchats = 0;
-
-        public Client(string nom, string prenom, string adresse, string telephone){
+        public Personne(string nom, string prenom){
             this.nom = nom;
             this.prenom = prenom;
-            this.customerID = PizzeriaController.getInstance.getClients.Count + 1;
+        }
+    }
+
+    public class Client : Personne{
+        private readonly uint customerID;
+        private string adresse;
+        private string telephone;
+        private DateTime firstOrder;
+        private uint nbCommandes = 0;
+        private double montantAchats = 0;
+
+        public Client(string nom, string prenom, string adresse, string telephone) : base(nom, prenom)
+        {
+            this.customerID = (uint)PizzeriaController.getInstance().getClients().Count + 1;
             this.adresse = adresse;
             this.telephone = telephone;
             this.firstOrder = DateTime.Now;
@@ -40,16 +44,22 @@ namespace Personnes{
             nbCommandes ++;
         }
 
-        public void increaseMontantAchats(decimal totalPrice){
+        public void increaseMontantAchats(double totalPrice){
             montantAchats += totalPrice;
         }
 
     }
 
 
-    class Commis : Personne{
+    public class Commis : Personne{
         private readonly uint employeID;
         private uint nbCommandes = 0;
+
+        public Commis(string nom, string prenom) : base(nom, prenom)
+        {
+            // appeler PizzeriaController pour avoir le nombre d'employés et attribuer une valeur à employeID
+
+        }
 
         public uint getCommisID(){return employeID;}
 
@@ -57,14 +67,14 @@ namespace Personnes{
 
         public void addCustomer(){
             string nom, prenom, adresse;
-            string[10] telephone;
+            string telephone;
             PizzeriaController.getInstance().getClients().Add(new Client(nom, prenom, adresse, telephone));
         }
 
         public void modifyCustomer(){}
 
         public void deleteCustomer(uint ID){
-            PizzeriaController.getInstance().getClients().RemoveAt(ID - 1);
+            PizzeriaController.getInstance().getClients().RemoveAt((int)ID - 1);
         }
 
         public void addOrder(Client client){
@@ -94,9 +104,14 @@ namespace Personnes{
     }
 
 
-    class Livreur : Personne{
+    public class Livreur : Personne{
         private readonly uint employeID;
         private uint nbLivraisons = 0;
+
+        public Livreur(string nom, string prenom) : base(nom, prenom)
+        {
+            // appeler PizzeriaController pour avoir le nombre d'employés et attribuer une valeur à employeID
+        }
 
 
         public uint getLivreurID(){return employeID;}
@@ -104,7 +119,7 @@ namespace Personnes{
         public uint getNbLivraisons(){return nbLivraisons;}
 
         public void remiseCommande(Commande commande){
-            commande.getClient().paieCommande(commande);
+            commande.getClientID().paieCommande(commande);
             commande.setEtatPaiement(paiement.encaissé);
             nbLivraisons ++;
         }

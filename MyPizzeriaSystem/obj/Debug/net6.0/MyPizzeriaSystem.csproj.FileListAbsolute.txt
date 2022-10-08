@@ -1,0 +1,5 @@
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\obj\Debug\net6.0\MyPizzeriaSystem.csproj.AssemblyReference.cache
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\obj\Debug\net6.0\MyPizzeriaSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\obj\Debug\net6.0\MyPizzeriaSystem.AssemblyInfoInputs.cache
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\obj\Debug\net6.0\MyPizzeriaSystem.AssemblyInfo.cs
+C:\Users\kaisz\Documents\EFREI\S7\Intégration de systèmes\Applications\Projet\MyPizzeriaSystem\obj\Debug\net6.0\MyPizzeriaSystem.csproj.CoreCompileInputs.cache

@@ -4,16 +4,11 @@ using Personnes;
 using Interactions;
 
 namespace Menu{
-
-    enum base_pizza{tomate, crèmeFraîche, BBQ}
-
-    enum format{petit, moyen, grand}
-
-    enum boissons{Eau, JusOrange, CocaCola, Fanta, Sprite}
-
-    enum statut{préparation, livraison, fermée}
-
-    enum paiement{attente, encaissé, perte}
+    public enum base_pizza{tomate, crèmeFraîche, BBQ}
+    public enum format{petit, moyen, grand}
+    public enum boissons{Eau, JusOrange, CocaCola, Fanta, Sprite}
+    public enum statut{préparation, livraison, fermée}
+    public enum paiement{attente, encaissé, perte}
 
 
     public class Commande{
@@ -21,38 +16,37 @@ namespace Menu{
         private DateTime heureDate;
         private uint commisID;
         private uint clientID;
-        private uint nbItems = 0;
+        private uint nbItems;
         private List<Pizza> pizzas;
         private List<boissons> produitsAnnexes;
-        private decimal totalPrice = 0;
+        private double totalPrice = 0;
         private statut etatCommande;
         private paiement etatPaiement;
 
 
         public Commande(uint commisID, uint clientID, List<Pizza> pizzas, List<boissons> produitsAnnexes){
-            numero = PizzeriaController.getInstance().getCommandes().Count + 1;
+            numero = (uint)PizzeriaController.getInstance().getCommandes().Count + 1;           
             heureDate = DateTime.Now;
-            this.commis = commis;
-            this.client = client;
+            this.commisID = commisID;
+            this.clientID = clientID;
             this.pizzas = pizzas;
             this.produitsAnnexes = produitsAnnexes;
-            this.totalPrice = computeTotalPrice();
+            this.nbItems = (uint)(pizzas.Count + produitsAnnexes.Count);
+            setTotalPrice();
             etatCommande = statut.préparation;
             etatPaiement = paiement.attente;
         }
 
-        public void computeTotalPrice(){
-            foreach (var pizza in pizzas){
-                totalPrice += pizza.getPrice();
-            }
-            totalPrice += (produitsAnnexes.Count) * 1.5;
+        public void setTotalPrice(){
+            foreach (var pizza in pizzas){totalPrice += pizza.getPrice();}
+            totalPrice += (double)(produitsAnnexes.Count * 1.5);
         }
 
-        public Commis getCommis(){return commis;}
+        public uint getCommisID(){return commisID;}
         
-        public Client getClient(){return client;}
+        public uint getClientID(){return clientID;}
 
-        public decimal getTotalPrice(){return totalPrice;}
+        public double getTotalPrice(){return totalPrice;}
 
         public void setEtatCommande(statut etat){etatCommande = etat;}
 
@@ -61,12 +55,47 @@ namespace Menu{
 
 
     public class Pizza{
-        private readonly string nom;
+        private string nom;
         private base_pizza type;
         private format taille;
-        private decimal prix;
+        private double prix;
 
-        public decimal getPrice(){return prix;}
+        private static Dictionary<string, double> pizzaPrices = new Dictionary<string, double>(){
+            {"Marguerita", 6.50},
+            {"Végétarienne", 7.90},
+            {"Reine", 8.50},
+            {"Fruits de mer", 10.90},
+            {"Norvégienne", 9.50},
+            {"Campione", 8.50},
+            {"Régina", 8.50},
+            {"Orientale", 8.50},
+            {"Napolitaine", 8.00},
+            {"Hawaïenne", 9.00}
+        };
+
+        public Pizza(string nom, base_pizza type, format taille){
+            this.nom = nom;
+            this.type = type;
+            this.taille = taille;
+            setPrice();
+        }
+
+        public void setPrice(){
+            switch(taille)
+            {
+                case format.moyen:
+                    prix = pizzaPrices[nom];
+                    break;
+                case format.petit:
+                    prix = pizzaPrices[nom] - 1;
+                    break;
+                case format.grand:
+                    prix = pizzaPrices[nom] + 1;
+                    break;
+            }
+        }
+
+        public double getPrice(){return prix;}
 
     }
 }

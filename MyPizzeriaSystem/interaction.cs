@@ -6,19 +6,26 @@ using Menu;
 namespace Interactions{
 
     public class Message{
-        private static string text;
-        private static Personnes sender;
-        private static Personnes receiver;
-        private static DateTime heureDate;
+        private string text;
+        private Personne sender;
+        private Personne receiver;
+        private DateTime heureDate;
 
+        public Message(string text, Personne sender, Personne receiver){
+            this.text = text;
+            this.sender = sender;
+            this.receiver = receiver;
+            heureDate = DateTime.Now;
+        }
 
     }
 
     public sealed class PizzeriaController{
-        private static PizzeriaController instance;
-        private static List<Client> clients;
-        private static List<Commande> commandes;
+        private static PizzeriaController? instance;
+        private static List<Client>? clients;
+        private static List<Commande>? commandes;
 
+        private PizzeriaController(){} // declare les listes de clients - commandes - 
 
         public static PizzeriaController getInstance(){
             if(instance == null)
@@ -26,9 +33,9 @@ namespace Interactions{
             return instance;
         }
 
-        public static List<Client> getClients(){return clients;}
+        public List<Client>? getClients(){return clients;}
 
-        public static List<Commande> getCommandes(){return commandes;}
+        public List<Commande>? getCommandes(){return commandes;}
 
 
     }
