@@ -1,6 +1,7 @@
 using System;
 using Menu;
 using Personnes;
+using Interactions;
 
 namespace Process
 {
@@ -76,6 +77,62 @@ namespace Process
         }
 
 
+        public static string getClientsByAlphabeticOrder(){
+            string clients = "";
+            List<Client> sortedList = PizzeriaController.getInstance().getClients().OrderBy(c=>c.getFullName()).ToList();
+            foreach (Client c in sortedList){
+                clients += c.toString() + "\n";
+            }
+            return clients;
+        }
+
+
+        public static string getClientsByCity(string city){
+            string clients = "";
+            foreach (Client client in PizzeriaController.getInstance().getClients()){
+                if (client.getAdresse().getCity().ToLower() == city.ToLower())
+                    clients += client.toString() + "\n";
+            }
+            return clients;
+        }
+
+
+        public static string getClientsByAmount(){
+            string clients = "";
+            List<Client> sortedList = PizzeriaController.getInstance().getClients().OrderBy(c=>c.getAmount()).ToList();
+            foreach (Client c in sortedList){
+                clients += c.toString() + "\n";
+            }
+            return clients;
+        }
+
+
+        public static string getCommisByOrders(){
+            string commis = "";
+            foreach (Commis c in PizzeriaController.getInstance().getCommis()){
+                commis += c.toString() + "\n";
+            }
+            return commis;
+        }
+
+
+        public static string getLivreursByDelivery(){
+            string commis = "";
+            foreach (Livreur l in PizzeriaController.getInstance().getLivreurs()){
+                commis += l.toString() + "\n";
+            }
+            return commis;
+        }
+
+
+        public static string getMoyCommandes(){
+            double prices = 0;
+            foreach (Commande c in PizzeriaController.getInstance().getCommandes()){
+                prices += c.getTotalPrice();
+            }
+            prices = prices / PizzeriaController.getInstance().getCommandes().Count;
+            return "Moyenne des prix des commandes : " + prices;
+        }
     }
 }
 

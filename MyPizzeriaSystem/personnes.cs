@@ -45,6 +45,11 @@ namespace Personnes{
 
         public Commis(string nom, string prenom) : base(nom, prenom){}
 
+        public string toString(){
+            return "\nID Employe : " + getEmployeID() + "\nNom : " + getFullName() + 
+            "\nNb Commandes : " + nbCommandes;
+        }
+
         public uint getNbCommandes(){return nbCommandes;}
 
         public void addCustomer(){
@@ -80,15 +85,12 @@ namespace Personnes{
             for (int i = 0; i < n_boissons; i++){
                 produitsAnnexes.Add(Fonctions.askDrink());
             }
-
-            client.setFirstOrder();
             PizzeriaController.getInstance().getCommandes().Add(new Commande(this, client, pizzas, produitsAnnexes));
-        }
-
-        public void closeOrder(Commande commande){
-            commande.setEtatCommande(statut.fermée);
+            client.setFirstOrder();
             nbCommandes ++;
         }
+
+        public void closeOrder(Commande commande){commande.setEtatCommande(statut.fermée);}
     }
 
 
@@ -97,6 +99,11 @@ namespace Personnes{
         private uint nbLivraisons = 0;
 
         public Livreur(string nom, string prenom) : base(nom, prenom){}
+
+        public string toString(){
+            return "\nID Employe : " + getEmployeID() + "\nNom : " + getFullName() + 
+            "\nNb Commandes : " + nbLivraisons;
+        }
 
         public uint getNbLivraisons(){return nbLivraisons;}
 
@@ -130,8 +137,8 @@ namespace Personnes{
 
         public uint getClientID(){return customerID;}
         public Adresse getAdresse(){return adresse;}
-        public string getTelephone(){return telephone;}
         public DateTime getFirstOrder(){return firstOrder;}
+        public double getAmount(){return montantAchats;}
         public void setFirstOrder(){firstOrder = DateTime.Now;}
 
         public void paieCommande(Commande commande){
@@ -145,6 +152,11 @@ namespace Personnes{
 
         public void increaseMontantAchats(double totalPrice){
             montantAchats += totalPrice;
+        }
+
+        public string toString(){
+            return "\nID Client : " + customerID + "\nNom : " + this.getFullName() + "\nAdresse : " + adresse.toString() +
+            "\nTéléphone : " + telephone + "\nNombre de commandes : " + nbCommandes + "\nMontant total commandes : " + montantAchats;
         }
 
     }
@@ -166,6 +178,8 @@ namespace Personnes{
         public string toString(){
             return numRue + " " + nomRue + " " + codePostal + " " + ville;
         }
+
+        public string getCity(){return ville;}
     }
 
 
