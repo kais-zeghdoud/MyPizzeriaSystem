@@ -12,7 +12,7 @@ namespace Process
             do{
                 Console.Write("Entrez le nombre de {0} : ", item);
                 number = Convert.ToInt32(Console.ReadLine());
-            }while(number > 0);
+            }while(number < 1);
             return number;
         }
 
@@ -167,9 +167,11 @@ namespace Process
             var d = new Dictionary<int, System.Action>();
             d[1] = new Action(PizzeriaController.getInstance().addCommis);
             d[2] = new Action(PizzeriaController.getInstance().addLivreur);
-            d[3] = new Action(PizzeriaController.getInstance().getCommis().ElementAt(0).addCustomer);
-            d[4] = new Action(PizzeriaController.getInstance().getCommis().ElementAt(0).modifyCustomer);
-            d[5] = new Action(PizzeriaController.getInstance().getCommis().ElementAt(0).deleteCustomer);
+            if (PizzeriaController.getInstance().getCommis().Count != 0){
+                d[3] = new Action(PizzeriaController.getInstance().getCommis().ElementAt(0).addCustomer);
+                d[4] = new Action(PizzeriaController.getInstance().getCommis().ElementAt(0).modifyCustomer);
+                d[5] = new Action(PizzeriaController.getInstance().getCommis().ElementAt(0).deleteCustomer);
+            }
             d[6] = new Action(showCommisByOrders);
             d[7] = new Action(showLivreursByDelivery);
             d[8] = new Action(getClientsByAlphabeticOrder);
@@ -180,11 +182,15 @@ namespace Process
         }
 
 
-        public static void menuCommandes(int choice, int ID){
+        public static void menuCommandes(int choice, string employe){
             var d = new Dictionary<int, System.Action>();
-            d[1] = new Action(PizzeriaController.getInstance().getCommis().ElementAt(ID-1).addCustomer);
-            d[2] = new Action(PizzeriaController.getInstance().getLivreurs().ElementAt(ID-1).remiseCommande);
-            d[3] = new Action(PizzeriaController.getInstance().getCommis().ElementAt(ID-1).closeOrder);
+            if(choice == 1 || choice == 3){
+                d[1] = new Action(PizzeriaController.getInstance().getCommis().Find(c => c.getFullName() == employe).addOrder);
+                d[3] = new Action(PizzeriaController.getInstance().getCommis().Find(c => c.getFullName() == employe).closeOrder);
+            }
+            if(choice == 2){
+                d[2] = new Action(PizzeriaController.getInstance().getLivreurs().Find(c => c.getFullName() == employe).remiseCommande);
+            }
             d[4] = new Action(PizzeriaController.getInstance().showCommandes);
             d[5] = new Action(getCurringOrders);
             d[6] = new Action(getDelivringOrders);

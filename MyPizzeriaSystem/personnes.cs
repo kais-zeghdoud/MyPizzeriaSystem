@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Interactions;
 using Menu;
 using Process;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Personnes{
 
@@ -16,7 +18,7 @@ namespace Personnes{
             this.prenom = prenom;
         }
 
-        public string getFullName(){return nom + ' ' +prenom;}
+        public string getFullName(){return prenom + ' ' +nom;}
 
         public List<Message> getMessages(){return messages;}
 
@@ -53,11 +55,11 @@ namespace Personnes{
         public uint getNbCommandes(){return nbCommandes;}
 
         public void addCustomer(){
-            Console.Write("Entrez le nom du client : ");
-            string nom = Console.ReadLine();
-
             Console.Write("Entrez le prénom du client : ");
             string prenom = Console.ReadLine();
+
+            Console.Write("Entrez le nom du client : ");
+            string nom = Console.ReadLine();
 
             Adresse adresse = Fonctions.askAdresse();
 
@@ -78,7 +80,13 @@ namespace Personnes{
             PizzeriaController.getInstance().getClients().RemoveAt((int)ID - 1);
         }
 
-        public void addOrder(Client client){
+        public void addOrder(){
+            int IDClient;
+            do{
+                Console.Write("Entrer l'ID du client qui commande : ");
+                IDClient = Convert.ToInt32(Console.ReadLine());
+            }while(IDClient > PizzeriaController.getInstance().getClients().Count);
+            Client client = PizzeriaController.getInstance().getClients().ElementAt(IDClient -1);
             List<Pizza> pizzas = new List<Pizza>();
             List<boissons> produitsAnnexes = new List<boissons>();
             int n_pizza = Fonctions.askNumber("pizza");
@@ -90,9 +98,13 @@ namespace Personnes{
             for (int i = 0; i < n_boissons; i++){
                 produitsAnnexes.Add(Fonctions.askDrink());
             }
-            PizzeriaController.getInstance().getCommandes().Add(new Commande(this, client, pizzas, produitsAnnexes));
+
+            Commande c = new Commande(this, client, pizzas, produitsAnnexes);
+            PizzeriaController.getInstance().getCommandes().Add(c);
             client.setFirstOrder();
             nbCommandes ++;
+
+            getOrderReady(c);
         }
 
         public void closeOrder(){
@@ -106,6 +118,11 @@ namespace Personnes{
             
             c = PizzeriaController.getInstance().getCommandes().ElementAt(id - 1);
             c.setEtatCommande(statut.fermée);
+        }
+
+        public async Task getOrderReady(Commande c){
+            await Task.Run(()=> Thread.Sleep(10000 * c.getnbItems())); // 10sec per item
+            c.setEtatCommande(statut.livraison);
         }
     }
 

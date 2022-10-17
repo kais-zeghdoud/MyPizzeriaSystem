@@ -13,7 +13,7 @@ public class MyPizzeriaSystem{
         while(run)
         {
             do{
-                Console.WriteLine("\nMENU\n\n1 - Module Effecif/Client\n2 - Module Commandes\n3 - ModuleStatistiques" +
+                Console.WriteLine("\nMENU\n\n1 - Module Effecif/Client\n2 - Module Commandes\n3 - Module Statistiques" +
                 "\n4 - Module Communication \n5 - Quitter");
                 menu = Convert.ToInt16(Console.ReadLine());
             }while(menu < 1 || menu>5);
@@ -40,7 +40,7 @@ public class MyPizzeriaSystem{
 
 
                 case 2 :
-                    int ID = 0;
+                    string employe = "";
                     do{
                         Console.WriteLine("\n1 - Créer une commande" +
                         "\n2 - Livrer une commande " +
@@ -51,10 +51,10 @@ public class MyPizzeriaSystem{
                         choice = Convert.ToInt16(Console.ReadLine());
                     }while(choice < 1 || choice>6);
                     if (choice < 4){
-                        Console.Write("Entrez l'ID de l'employé qui gère la commande : ");
-                        ID = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Entrez le nom de l'employé qui gère la commande : ");
+                        employe = Console.ReadLine();
                     }
-                    Fonctions.menuCommandes(choice, ID);
+                    Fonctions.menuCommandes(choice, employe);
                     break;
 
 
@@ -80,6 +80,9 @@ public class MyPizzeriaSystem{
                     run = false;
                     break;
             }
+            Console.WriteLine("\nPress enter to go back to the main menu");
+            Console.ReadKey();
+            Console.Clear();
         }
         Console.ReadKey();
     }

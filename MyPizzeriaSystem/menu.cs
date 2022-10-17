@@ -54,6 +54,8 @@ namespace Menu{
 
         public paiement getPaiement(){return etatPaiement;}
 
+        public int getnbItems(){return (int)nbItems;}
+
         public void setEtatCommande(statut etat){etatCommande = etat;}
 
         public void setEtatPaiement(paiement etat){etatPaiement = etat;}
