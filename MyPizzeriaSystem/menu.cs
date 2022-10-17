@@ -16,6 +16,7 @@ namespace Menu{
         private DateTime heureDate;
         private Commis commis;
         private Client client;
+        private Livreur livreur;
         private uint nbItems;
         private List<Pizza> pizzas;
         private List<boissons> produitsAnnexes;
@@ -59,6 +60,10 @@ namespace Menu{
         public void setEtatCommande(statut etat){etatCommande = etat;}
 
         public void setEtatPaiement(paiement etat){etatPaiement = etat;}
+
+        public void setLivreur(Livreur livreur){this.livreur = livreur;}
+
+        public Livreur getLivreur(){return livreur;}
 
         public void toString(){
             Console.WriteLine("Commande : " + numero + "\nHeure et date : " + heureDate +

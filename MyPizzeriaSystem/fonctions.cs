@@ -211,7 +211,13 @@ namespace Process
         }
 
 
-        public static void menuCommunication(int choice){
+        public static void menuCommunication(int choice, string fullName){
+            var d = new Dictionary<int, System.Action>();
+            d[1] = new Action(PizzeriaController.getInstance().getClients().Find(c => c.getFullName() == fullName).showMessages);
+            d[2] = new Action(PizzeriaController.getInstance().getLivreurs().Find(l => l.getFullName() == fullName).showMessages);
+            d[3] = new Action(PizzeriaController.getInstance().getCommis().Find(c => c.getFullName() == fullName).showMessages);
+
+            d[choice].DynamicInvoke();
 
         }
     }

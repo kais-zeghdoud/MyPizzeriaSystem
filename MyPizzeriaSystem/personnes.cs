@@ -25,6 +25,10 @@ namespace Personnes{
         public void sendMessage(string text, Personne receiver){
             receiver.getMessages().Add(new Message(text, this, receiver));
         }
+
+        public void showMessages(){
+            foreach (Message m in messages){m.toString();}
+        }
     }
 
 
@@ -103,7 +107,8 @@ namespace Personnes{
             PizzeriaController.getInstance().getCommandes().Add(c);
             client.setFirstOrder();
             nbCommandes ++;
-
+            
+            this.sendMessage("Cher client, votre commande a été prise en charge", client);
             getOrderReady(c);
         }
 
@@ -118,6 +123,7 @@ namespace Personnes{
             
             c = PizzeriaController.getInstance().getCommandes().ElementAt(id - 1);
             c.setEtatCommande(statut.fermée);
+            this.sendMessage("Commande clôturée!\nMontant total : " + c.getTotalPrice() , c.getLivreur());
         }
 
         public async Task getOrderReady(Commande c){
@@ -152,6 +158,7 @@ namespace Personnes{
             c = PizzeriaController.getInstance().getCommandes().ElementAt(id - 1);
             c.getClient().paieCommande(c);
             c.setEtatPaiement(paiement.encaissé);
+            c.setLivreur(this);
             nbLivraisons ++;
         }
 

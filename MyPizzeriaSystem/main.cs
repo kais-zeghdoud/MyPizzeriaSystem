@@ -72,7 +72,16 @@ public class MyPizzeriaSystem{
 
 
                 case 4 :
-                Console.WriteLine("");
+                string fullName = "";
+                    do{
+                        Console.WriteLine("\n1 - Afficher les messages d'un client" +
+                        "\n2 - Afficher les messages d'un livreur" +
+                        "\n3 - Afficher les messages d'un commis");
+                        choice = Convert.ToInt16(Console.ReadLine());
+                    }while(choice < 1 || choice>3);
+                    Console.Write("Entrez le nom de la personne : ");
+                    fullName = Console.ReadLine();
+                    Fonctions.menuCommunication(choice, fullName);
                     break;
 
 
