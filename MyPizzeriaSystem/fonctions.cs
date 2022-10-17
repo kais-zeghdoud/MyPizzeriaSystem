@@ -77,61 +77,136 @@ namespace Process
         }
 
 
-        public static string getClientsByAlphabeticOrder(){
-            string clients = "";
+        public static void getClientsByAlphabeticOrder(){
             List<Client> sortedList = PizzeriaController.getInstance().getClients().OrderBy(c=>c.getFullName()).ToList();
             foreach (Client c in sortedList){
-                clients += c.toString() + "\n";
+                Console.WriteLine(c.toString());
             }
-            return clients;
         }
 
 
-        public static string getClientsByCity(string city){
-            string clients = "";
+        public static void getClientsByCity(){
+            string city;
+            Console.Write("Entrez le nom de la ville : ");
+            city  = Console.ReadLine();
+
             foreach (Client client in PizzeriaController.getInstance().getClients()){
                 if (client.getAdresse().getCity().ToLower() == city.ToLower())
-                    clients += client.toString() + "\n";
+                    Console.WriteLine(client.toString());
             }
-            return clients;
         }
 
 
-        public static string getClientsByAmount(){
-            string clients = "";
+        public static void showClientsByAmount(){
             List<Client> sortedList = PizzeriaController.getInstance().getClients().OrderBy(c=>c.getAmount()).ToList();
             foreach (Client c in sortedList){
-                clients += c.toString() + "\n";
+                Console.WriteLine(c.toString());
             }
-            return clients;
         }
 
 
-        public static string getCommisByOrders(){
-            string commis = "";
+        public static void showCommisByOrders(){
             foreach (Commis c in PizzeriaController.getInstance().getCommis()){
-                commis += c.toString() + "\n";
+                Console.WriteLine(c.toString());
             }
-            return commis;
         }
 
 
-        public static string getLivreursByDelivery(){
-            string commis = "";
+        public static void showLivreursByDelivery(){
             foreach (Livreur l in PizzeriaController.getInstance().getLivreurs()){
-                commis += l.toString() + "\n";
+                Console.WriteLine(l.toString());
             }
-            return commis;
         }
 
 
-        public static string getMoyCommandes(){
+        public static void showMoyCommandes(){
             double prices = 0;
             foreach (Commande c in PizzeriaController.getInstance().getCommandes()){
                 prices += c.getTotalPrice();
             }
             prices = prices / PizzeriaController.getInstance().getCommandes().Count;
-            return "Moyenne des prix des commandes : " + prices;
+
+            Console.WriteLine("Moyenne des prix des commandes : " + prices);
+        }
+
+        public static void showMoyClients(){
+            double moy;
+            foreach (Client c in PizzeriaController.getInstance().getClients())
+            {
+                moy = c.getAmount() / c.getNbCommandes();
+                c.toString();
+                Console.WriteLine("Moyenne du compte client : {0}", moy);
+            }
+        }
+
+        public static void showCommandesbyDate(){
+            DateTime d;
+            List<Commande> commandes = PizzeriaController.getInstance().getCommandes();
+            do{
+                Console.Write("Entrer une date minimale au format (year-month-day): ");
+                d = Convert.ToDateTime(Console.ReadLine());
+            }while(d > DateTime.Now);
+            foreach (Commande c in commandes.Where(c => c.getHeureDate() > d)){
+                c.toString();
+            }
+        }
+
+
+        public static void getCurringOrders(){
+            List<Commande> commandes = PizzeriaController.getInstance().getCommandes();
+            foreach (Commande c in commandes.Where(c => c.getEtat()== statut.préparation)){c.toString();}
+        }
+
+        public static void getDelivringOrders(){
+            List<Commande> commandes = PizzeriaController.getInstance().getCommandes();
+            foreach (Commande c in commandes.Where(c => c.getEtat()== statut.livraison)){c.toString();}
+        }
+
+
+        public static void menuEffectifClient(int choice){
+            var d = new Dictionary<int, System.Action>();
+            d[1] = new Action(PizzeriaController.getInstance().addCommis);
+            d[2] = new Action(PizzeriaController.getInstance().addLivreur);
+            d[3] = new Action(PizzeriaController.getInstance().getCommis().ElementAt(0).addCustomer);
+            d[4] = new Action(PizzeriaController.getInstance().getCommis().ElementAt(0).modifyCustomer);
+            d[5] = new Action(PizzeriaController.getInstance().getCommis().ElementAt(0).deleteCustomer);
+            d[6] = new Action(showCommisByOrders);
+            d[7] = new Action(showLivreursByDelivery);
+            d[8] = new Action(getClientsByAlphabeticOrder);
+            d[9] = new Action(getClientsByCity);
+            d[10] = new Action(showClientsByAmount);
+
+            d[choice].DynamicInvoke();
+        }
+
+
+        public static void menuCommandes(int choice, int ID){
+            var d = new Dictionary<int, System.Action>();
+            d[1] = new Action(PizzeriaController.getInstance().getCommis().ElementAt(ID-1).addCustomer);
+            d[2] = new Action(PizzeriaController.getInstance().getLivreurs().ElementAt(ID-1).remiseCommande);
+            d[3] = new Action(PizzeriaController.getInstance().getCommis().ElementAt(ID-1).closeOrder);
+            d[4] = new Action(PizzeriaController.getInstance().showCommandes);
+            d[5] = new Action(getCurringOrders);
+            d[6] = new Action(getDelivringOrders);
+
+            d[choice].DynamicInvoke();
+        }
+
+
+        public static void menuStatistiques(int choice){
+            var d = new Dictionary<int, System.Action>();
+            d[1] = new Action(showCommisByOrders);
+            d[2] = new Action(showLivreursByDelivery);
+            d[3] = new Action(showCommandesbyDate);
+            d[4] = new Action(showMoyCommandes);
+            d[5] = new Action(showMoyClients);
+
+            d[choice].DynamicInvoke();
+        }
+
+
+        public static void menuCommunication(int choice){
+
         }
     }
 }

@@ -53,9 +53,27 @@ namespace Interactions{
 
         public List<Livreur> getLivreurs(){return livreurs;}
 
-        public void addCommis(string nom, string prenom){commis.Add(new Commis(nom, prenom));}
+        public void addCommis(){
+            string nom, prenom;
+            Console.Write("Entrez le nom du commis : ");
+            nom = Console.ReadLine();
+            Console.Write("Entrez le prénom du commis : ");
+            prenom = Console.ReadLine();
+            commis.Add(new Commis(nom, prenom));
+        }
         
-        public void addLivreur(string nom, string prenom){livreurs.Add(new Livreur(nom, prenom));}
+        public void addLivreur(){
+            string nom, prenom;
+            Console.Write("Entrez le nom du livreur : ");
+            nom = Console.ReadLine();
+            Console.Write("Entrez le prénom du livreur : ");
+            prenom = Console.ReadLine();
+            livreurs.Add(new Livreur(nom, prenom));
+        }
+
+        public void showCommandes(){
+            foreach (Commande c in commandes){c.toString();}
+        }
 
     }
 }

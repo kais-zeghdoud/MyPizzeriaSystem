@@ -69,7 +69,12 @@ namespace Personnes{
 
         public void modifyCustomer(){}
 
-        public void deleteCustomer(uint ID){
+        public void deleteCustomer(){
+            uint ID;
+            do{
+                Console.Write("Entrer le numéro de client à supprimer : ");
+                ID = Convert.ToUInt16(Console.ReadLine());
+            }while(ID > PizzeriaController.getInstance().getClients().Count + 1);
             PizzeriaController.getInstance().getClients().RemoveAt((int)ID - 1);
         }
 
@@ -90,7 +95,18 @@ namespace Personnes{
             nbCommandes ++;
         }
 
-        public void closeOrder(Commande commande){commande.setEtatCommande(statut.fermée);}
+        public void closeOrder(){
+            Commande c;
+            int id;
+            do{
+                Fonctions.getDelivringOrders();
+                Console.Write("Entrer l'ID de la commande à clôturer : ");
+                id = Convert.ToInt32(Console.ReadLine());
+            }while(id > PizzeriaController.getInstance().getCommandes().Where(c => c.getPaiement()== paiement.encaissé).Count());
+            
+            c = PizzeriaController.getInstance().getCommandes().ElementAt(id - 1);
+            c.setEtatCommande(statut.fermée);
+        }
     }
 
 
@@ -107,9 +123,18 @@ namespace Personnes{
 
         public uint getNbLivraisons(){return nbLivraisons;}
 
-        public void remiseCommande(Commande commande){
-            commande.getClient().paieCommande(commande);
-            commande.setEtatPaiement(paiement.encaissé);
+        public void remiseCommande(){
+            Commande c;
+            int id;
+            do{
+                Fonctions.getDelivringOrders();
+                Console.Write("Entrer l'ID de la commande à livrer : ");
+                id = Convert.ToInt32(Console.ReadLine());
+            }while(id > PizzeriaController.getInstance().getCommandes().Where(c => c.getEtat()== statut.livraison).Count());
+            
+            c = PizzeriaController.getInstance().getCommandes().ElementAt(id - 1);
+            c.getClient().paieCommande(c);
+            c.setEtatPaiement(paiement.encaissé);
             nbLivraisons ++;
         }
 
@@ -138,6 +163,7 @@ namespace Personnes{
         public uint getClientID(){return customerID;}
         public Adresse getAdresse(){return adresse;}
         public DateTime getFirstOrder(){return firstOrder;}
+        public int getNbCommandes(){return (int)nbCommandes;}
         public double getAmount(){return montantAchats;}
         public void setFirstOrder(){firstOrder = DateTime.Now;}
 
