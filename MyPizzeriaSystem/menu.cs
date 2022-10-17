@@ -42,15 +42,27 @@ namespace Menu{
             totalPrice += (double)(produitsAnnexes.Count * 1.5);
         }
 
+        public DateTime getHeureDate(){return heureDate;}
+
         public Commis getCommis(){return commis;}
         
         public Client getClient(){return client;}
 
         public double getTotalPrice(){return totalPrice;}
 
+        public statut getEtat(){return etatCommande;}
+
+        public paiement getPaiement(){return etatPaiement;}
+
         public void setEtatCommande(statut etat){etatCommande = etat;}
 
         public void setEtatPaiement(paiement etat){etatPaiement = etat;}
+
+        public void toString(){
+            Console.WriteLine("Commande : " + numero + "\nHeure et date : " + heureDate +
+            "\nClient : " + client.getFullName() + "\nNombre articles : " + nbItems +
+            "\nPrix total : " + totalPrice + "\nCommis : " + commis.getFullName());
+        }
     }
 
 
